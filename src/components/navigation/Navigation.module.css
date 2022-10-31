@@ -1,0 +1,21 @@
+.mainNav {
+  padding: 2rem;
+}
+
+.mainNav ul {
+  display: flex;
+  gap: 2rem;
+  justify-content: left;
+}
+
+.mainNav a {
+  color: white;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.mainNav a:hover,
+.mainNav a:active,
+.mainNav a.active {
+  color: #ffc107;
+}
