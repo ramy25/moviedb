@@ -3,6 +3,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  HashRouter,
+  createHashRouter,
 } from 'react-router-dom';
 
 import Home from './pages/home/Home';
@@ -11,7 +13,7 @@ import Movies from './pages/movies/Movies';
 import Discover from './pages/discover/Discover';
 import RootLayout from './pages/layout/RootLayout';
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
