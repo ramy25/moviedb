@@ -23,7 +23,6 @@ const Navigation: React.FC = () => {
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
-            end
           >
             Movies
           </NavLink>

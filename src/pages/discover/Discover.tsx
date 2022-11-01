@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import useHttp from '../../hooks/use-http';
 import { getMultiSearch } from '../../lib/api';
 import { useState, useEffect } from 'react';
-import { Grid, TextField, Button } from '@mui/material';
+import { TextField, Box } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {
   DataGrid,
   GridColDef,
@@ -85,50 +86,40 @@ const Discover: React.FC = () => {
     }
   }
 
-  console.log(multiSearchresults);
+  console.log(getMultiSearchstatus);
+  const loadingStatus = getMultiSearchstatus === 'pending' ? true : false;
+
   return (
     <>
       <form onSubmit={searchSubmitHandler}>
-        <Grid container direction="column" rowSpacing={2}>
-          <Grid item>
-            <label>Look up a movie, tv series or a person!</label>
-          </Grid>
-          <Grid item>
-            <TextField
-              label="Any search criteria!"
-              variant="outlined"
-              type="text"
-              inputRef={searchInput}
-            />
-          </Grid>
-          <Grid item mb={2}>
-            <Button variant="contained" size="medium" type="submit">
-              Start searching!
-            </Button>
-          </Grid>
-          <div style={{ height: 500, width: '100%' }}>
-            <DataGrid
-              rows={newResults}
-              columns={columns}
-              components={{
-                Toolbar: CustomToolbar,
-              }}
-            />
-          </div>
-
-          {/* <ul>
-            {getMultiSearchstatus === 'completed' &&
-              multiSearchresults?.results.length > 0 &&
-              multiSearchresults.results.map((el: any) => {
-                return (
-                  <li key={el.media_type + el.id}>
-                    <h3>Name: {el[getTitleFromType(el.media_type)]}</h3>
-                    <p>Type: {el.media_type}</p>
-                  </li>
-                );
-              })}
-          </ul> */}
-        </Grid>
+        <Box mb={5}>
+          <h3>Look up a movie, tv series or a person!</h3>
+          <TextField
+            label="Any search criteria!"
+            variant="outlined"
+            type="text"
+            inputRef={searchInput}
+          />
+        </Box>
+        <Box mb={5}>
+          <LoadingButton
+            variant="contained"
+            size="medium"
+            type="submit"
+            loading={loadingStatus}
+          >
+            Start searching!
+          </LoadingButton>
+        </Box>
+        <div style={{ height: 500, width: '100%' }}>
+          <DataGrid
+            rows={newResults}
+            columns={columns}
+            components={{
+              Toolbar: CustomToolbar,
+            }}
+          />
+        </div>
       </form>
     </>
   );

@@ -11,8 +11,13 @@ function RootLayout() {
         <Navigation />
       </Header>
       <main>
-        <Container>
-          <Box my={5}>
+        <Container
+          sx={{ flexDirection: 'column', height: '100%', display: 'flex' }}
+        >
+          <Box
+            my={5}
+            style={{ display: 'flex', flexDirection: 'column', flex: '1' }}
+          >
             <Outlet />
           </Box>
         </Container>

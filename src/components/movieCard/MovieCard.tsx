@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useHttp from '../../hooks/use-http';
 import { getMovieConfiguration } from '../../lib/api';
 import { useEffect } from 'react';
+import LoadingSpinner from '../../components/ui/loadingSpinner/LoadingSpinner';
 
 type Movie = {
   movieId: number;
@@ -30,6 +31,7 @@ const MovieCard = ({ movieId, movieTitle, moviePosterPath }: Movie) => {
         {...{ timeout: 2000 }}
       >
         <Link to={`/movies/${movieId.toString()}`}>
+          <LoadingSpinner status={movieConfigStatus} />
           {movieConfigStatus === 'completed' && (
             <img
               src={`${movieConfig.images.secure_base_url}/${movieConfig.images.poster_sizes[1]}/${moviePosterPath}`}

@@ -3,7 +3,9 @@ import { getPopularMovies } from '../../lib/api';
 import useHttp from '../../hooks/use-http';
 import { useEffect, useState } from 'react';
 import { Stack, Pagination, Box, TextField, Button } from '@mui/material';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styles from './Movies.module.css';
+import LoadingSpinner from '../../components/ui/loadingSpinner/LoadingSpinner';
 
 const filterMovies = (movies: any, searchTerm: any) => {
   return movies.filter((movie: any) =>
@@ -92,7 +94,7 @@ const Movies = () => {
 
   return (
     <>
-      <div>
+      <div className={styles['movies-container']}>
         {error && <p className="centered focused">{error}</p>}
         <Box mb={5}>
           <h3>Search through movies</h3>
@@ -104,33 +106,28 @@ const Movies = () => {
             value={searchFilter}
           />
         </Box>
-
-        {status === 'completed' && (
-          <>
-            <Box mb={5}>
-              <Button
-                variant="contained"
-                size="medium"
-                onClick={changeSortingHandler}
-              >
-                Sort Movies {isSortingAscending ? 'desc' : 'asc'}
-              </Button>
-            </Box>
-            <MovieList movies={moviesToShow} />
-          </>
-        )}
-
-        {!initialLoad && (
-          <Stack spacing={2}>
-            <Pagination
-              onChange={pageClickHandler}
-              count={totalNrOfPages}
-              variant="outlined"
-              shape="rounded"
-            />
-          </Stack>
-        )}
+        <Box mb={5}>
+          <Button
+            variant="contained"
+            size="medium"
+            onClick={changeSortingHandler}
+          >
+            Sort Movies {isSortingAscending ? 'desc' : 'asc'}
+          </Button>
+        </Box>
+        <LoadingSpinner status={status} />
+        {status === 'completed' && <MovieList movies={moviesToShow} />}
       </div>
+      {!initialLoad && (
+        <Stack spacing={2}>
+          <Pagination
+            onChange={pageClickHandler}
+            count={totalNrOfPages}
+            variant="outlined"
+            shape="rounded"
+          />
+        </Stack>
+      )}
     </>
   );
 };

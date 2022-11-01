@@ -2,6 +2,7 @@ import useHttp from '../../hooks/use-http';
 import { getSingleMovie, getMovieConfiguration } from '../../lib/api';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import LoadingSpinner from '../../components/ui/loadingSpinner/LoadingSpinner';
 
 const Movie = () => {
   const params = useParams();
@@ -22,9 +23,11 @@ const Movie = () => {
   } = useHttp(getMovieConfiguration, true);
 
   //console.log('params', params);
-  console.log('loadedMovie', loadedMovie);
-  console.log('movieconfig', movieConfig);
+  //console.log('loadedMovie', loadedMovie);
+  //console.log('movieconfig', movieConfig);
   //console.log(loadedMovie);
+
+  console.log(movieConfigStatus);
 
   useEffect(() => {
     getMovie(movieId);
@@ -32,11 +35,7 @@ const Movie = () => {
   }, [getMovie, movieId, getMovieConfig]);
 
   if (movieStatus === 'pending') {
-    return (
-      <div className="centered">
-        <p>Loading</p>
-      </div>
-    );
+    return <LoadingSpinner status={movieStatus} />;
   }
 
   if (movieError) {
@@ -51,15 +50,16 @@ const Movie = () => {
   }
 
   return (
-    <>
+    <div>
       <h1>{loadedMovie.title}</h1>
+      <LoadingSpinner status={movieConfigStatus} />
       {movieConfigStatus === 'completed' && (
         <img
           src={`${movieConfig.images.secure_base_url}/${movieConfig.images.poster_sizes[3]}/${loadedMovie.poster_path}`}
         />
       )}
       <p>{loadedMovie.overview}</p>
-    </>
+    </div>
   );
 };
 

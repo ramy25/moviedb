@@ -14,6 +14,7 @@ export async function getPopularMovies(page: number = 1) {
       },
     }
   );
+
   const data = await response.json();
 
   if (!response.ok) {
@@ -32,6 +33,7 @@ export async function getSingleMovie(movieId: number) {
   const response = await fetch(
     `${MOVIEDB_API}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
   );
+
   const data = await response.json();
 
   if (!response.ok) {
@@ -51,6 +53,9 @@ export async function getMovieConfiguration() {
       },
     }
   );
+
+  //await new Promise((r) => setTimeout(r, 2000));
+
   const data = await response.json();
 
   if (!response.ok) {

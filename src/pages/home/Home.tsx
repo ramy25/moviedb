@@ -1,7 +1,8 @@
 import MovieList from '../../components/movieList/MovieList';
 import useHttp from '../../hooks/use-http';
-import { getPopularMovies, getMultiSearch } from '../../lib/api';
+import { getPopularMovies } from '../../lib/api';
 import { useEffect } from 'react';
+import { CircularProgress } from '@mui/material';
 
 const Home = () => {
   const {
@@ -20,13 +21,13 @@ const Home = () => {
   if (status === 'pending') {
     return (
       <div className="centered">
-        <p>Loading</p>
+        <CircularProgress />
       </div>
     );
   }
 
   if (error) {
-    return <p className="centered focused">{error}</p>;
+    return <h1 className="centered">{error}</h1>;
   }
 
   if (
