@@ -3,6 +3,7 @@ import { getSingleMovie, getMovieConfiguration } from '../../lib/api';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/ui/loadingSpinner/LoadingSpinner';
+import WatchlistButton from '../../components/watchlistButton/WatchlistButton';
 
 const Movie = () => {
   const params = useParams();
@@ -21,13 +22,6 @@ const Movie = () => {
     data: movieConfig,
     error: movieConfigError,
   } = useHttp(getMovieConfiguration, true);
-
-  //console.log('params', params);
-  //console.log('loadedMovie', loadedMovie);
-  //console.log('movieconfig', movieConfig);
-  //console.log(loadedMovie);
-
-  console.log(movieConfigStatus);
 
   useEffect(() => {
     getMovie(movieId);
@@ -59,6 +53,13 @@ const Movie = () => {
         />
       )}
       <p>{loadedMovie.overview}</p>
+      <WatchlistButton
+        movie={{
+          title: loadedMovie.title,
+          id: movieId,
+          posterPath: loadedMovie.poster_path,
+        }}
+      />
     </div>
   );
 };

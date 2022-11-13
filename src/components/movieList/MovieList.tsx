@@ -6,9 +6,10 @@ type MovieList = {
 };
 
 const MovieList = ({ movies }: MovieList) => {
+  console.log('movies', movies);
   return (
     <>
-      <Grid container spacing={0}>
+      <Grid container spacing={2}>
         {movies?.map((movie: any) => (
           <MovieCard
             key={movie.id}

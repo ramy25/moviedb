@@ -3,10 +3,11 @@ import { Container, Box } from '@mui/material';
 import Navigation from '../../components/navigation/Navigation';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
+import WatchlistProvider from '../../store/WatchlistProvider';
 
 function RootLayout() {
   return (
-    <>
+    <WatchlistProvider>
       <Header>
         <Navigation />
       </Header>
@@ -23,7 +24,7 @@ function RootLayout() {
         </Container>
       </main>
       <Footer />
-    </>
+    </WatchlistProvider>
   );
 }
 

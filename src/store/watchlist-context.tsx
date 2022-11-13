@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Watchlist = React.createContext({
-  movies: [],
+const WatchlistContext = React.createContext({
+  movies: ([] = []),
   addMovie: (movie: any) => {},
-  removeMovie: (id: number) => {},
+  removeMovie: (id: any) => {},
 });
 
-export default Watchlist;
+export default WatchlistContext;
