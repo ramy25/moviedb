@@ -12,6 +12,7 @@ import Movie from './pages/movie/Movie';
 import Movies from './pages/movies/Movies';
 import Discover from './pages/discover/Discover';
 import RootLayout from './pages/layout/RootLayout';
+import Watchlist from './pages/watchlist/Watchlist';
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createHashRouter(
         <Route index element={<Movies />} />
         <Route path=":movieId" element={<Movie />} />
       </Route>
+      <Route path="/watchlist" element={<Watchlist />} />
       <Route path="/discover" element={<Discover />} />
     </Route>
   )

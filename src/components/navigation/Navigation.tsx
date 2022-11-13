@@ -38,6 +38,17 @@ const Navigation: React.FC = () => {
             Discover
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/watchlist"
+            className={({ isActive }) =>
+              isActive ? classes.active : undefined
+            }
+            end
+          >
+            Watchlist
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
